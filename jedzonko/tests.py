@@ -14,6 +14,6 @@ def test_wojtka():
 def test_gita():
     pass
 
-def test_mack():
+def test_mackaa():
     pass
 
