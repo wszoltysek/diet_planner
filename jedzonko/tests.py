@@ -8,6 +8,6 @@ def test_wojtka():
 def test_gita():
     pass
 
-def test_macka():
+def test_mackaa():
     pass
 
