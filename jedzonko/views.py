@@ -33,3 +33,22 @@ class Dashboard(View):
 class RecipeView(View):
     def get(self, request):
         return render(request, "app-recipes.html")
+
+class RecipeAdd(View):
+
+    def get(self, request):
+        return render(request, "app-add-recipe.html")
+
+    def post(self, request):
+        name = request.POST.get("name")
+        description = request.POST.get("description")
+        ingredients = request.POST.get("ingredients")
+        preparation_time = request.POST.get("preparation_time")
+        if name and description and ingredients and preparation_time:
+            Recipe.objects.create(name=name,
+                                  description=description,
+                                  preparation_time=preparation_time,
+                                  ingredients=ingredients,
+                                  created=datetime.datetime.utcnow(),
+                                  updated=datetime.datetime.utcnow())
+        return render(request, "app-add-recipe.html")
