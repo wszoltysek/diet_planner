@@ -43,32 +43,37 @@
     </header>
 
     <section class="padding-large bg-light">
+
         <div id="carouselExampleControls" class="carousel slide main-slider" data-ride="carousel">
             <div class="carousel-inner container">
+
                 <div class="carousel-item active">
                     <div class="container w-75 d-flex">
                         <div class="carousel-caption d-block">
-                            <h1>Lorem ipsum dolor sit amet</h1>
-                            <h3> consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                magna aliqua.</h3>
+                            {% for recipe in recipe1 %}
+                            <h1>{{ recipe.name }}</h1>
+                            <h3>{{ recipe.description }}</h3>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <div class="container w-75 d-flex">
                         <div class="carousel-caption d-block">
-                            <h1>Torem ipsum dolor sit amet</h1>
-                            <h3> consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                magna aliqua.</h3>
+                            {% for recipe in recipe2 %}
+                            <h1>{{ recipe.name }}</h1>
+                            <h3>{{ recipe.description }}</h3>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <div class="container w-75 d-flex">
                         <div class="carousel-caption d-block">
-                            <h1>Borem ipsum dolor sit amet</h1>
-                            <h3> consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                magna aliqua.</h3>
+                            {% for recipe in recipe3 %}
+                            <h1>{{ recipe.name }}</h1>
+                            <h3>{{ recipe.description }}</h3>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -82,6 +87,7 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
+
     </section>
 
     <section class="section-more padding-small">
