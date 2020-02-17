@@ -6,3 +6,6 @@ from django.test import TestCase
 
 def to_jest_test():
     pass
+
+def test_gita():
+    pass
