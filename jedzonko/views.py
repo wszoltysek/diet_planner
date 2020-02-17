@@ -25,7 +25,8 @@ class IndexView(View):
 
 class Dashboard(View):
     def get(self, request):
-        return render(request, "dashboard.html")
+        plan_count = Plan.objects.count("id")
+        return render(request, "dashboard.html", {"plan_count": plan_count})
 
 class RecipeView(View):
     def get(self, request):
