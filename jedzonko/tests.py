@@ -7,5 +7,13 @@ from django.test import TestCase
 def to_jest_test():
     pass
 
+
+def test_wojtka():
+    pass
+
 def test_gita():
     pass
+
+def test_mackaa():
+    pass
+
