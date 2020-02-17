@@ -11,4 +11,3 @@ class Recipe(models.Model):
     preparation_time = models.IntegerField()
     votes = models.IntegerField(default=0)
 
-
