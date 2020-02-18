@@ -27,12 +27,14 @@ class IndexView(View):
                       "recipe3": recipe3}
                       )
 
+
 class Dashboard(View):
     def get(self, request):
         plan_count = Plan.objects.count()
         recipes_count = Recipe.objects.count()
         return render(request, "dashboard.html", {"plan_count": plan_count,
                                                   "recipes_count": recipes_count})
+
 
 class RecipeView(View):
     def get(self, request):
@@ -42,6 +44,7 @@ class RecipeView(View):
         recipes = paginator.get_page(page)
         ctx = {"recipes": recipes}
         return render(request, "app-recipes.html", ctx)
+
 
 class RecipeAdd(View):
 
@@ -66,6 +69,7 @@ class RecipeAdd(View):
             return redirect("/recipe/add/", {"error_message": error_message})
 
 # ZADANIE 2.2 (reszta widoków dla urli zrobiona w innych zadaniach):
+
 
 class PlansList(View):
     def get(self, request):
