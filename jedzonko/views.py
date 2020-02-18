@@ -1,8 +1,9 @@
 from datetime import datetime
 import random
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response, redirect
 from django.views import View
 from jedzonko.models import *
+from django.contrib import messages
 
 
 class IndexView(View):
@@ -51,7 +52,10 @@ class RecipeAdd(View):
                                   ingredients=ingredients,
                                   created=datetime.datetime.utcnow(),
                                   updated=datetime.datetime.utcnow())
-        return render(request, "app-add-recipe.html")
+            return render(request, "app-add-recipe.html")
+        else:
+            error_message = messages.info(request, "Nie podano wszystkich danych")
+            return redirect("/recipe/add/", {"error_message": error_message})
 
 # ZADANIE 2.2 (reszta widoków dla urli zrobiona w innych zadaniach):
 
