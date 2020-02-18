@@ -91,17 +91,25 @@
     </section>
 
     <section class="section-more padding-small">
-        <div class="container d-flex justify-content-between">
-            <div class="mr-4">
-                <h1 class="pb-3">Lorem ipsum dolor sit amet</h1>
-                <h4 class="pt-1">consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                    magna aliqua.</h4>
-            </div>
-            <div class="ml-4 align-self-center">
-                <button class="btn btn-color rounded-0 mt-4 pl-4 pr-4">
-                    <a href="">Lorem ipsum</a>
-                </button>
-            </div>
+        <div class="container justify-content-between">
+            <h1 class="pb-3">Najnowszy plan: {{ newest_plan.name }}</h1>
+            <p>{{ newest_plan.description }}</p>
+            <table>
+                <tr>
+                    <td>Dzień</td>
+                    <td>Posiłek</td>
+                    <td>Danie</td>
+                    <td>Szczegóły</td>
+                </tr>
+                {% for day in plan_days %}
+                    <tr>
+                        <td>{{ day.day_name.name }}</td>
+                        <td>{{ day.meal_name }}</td>
+                        <td>{{ day.recipe.name }}</td>
+                        <td><a href="/recipe/{{ day.recipe.id }}">Szczegoły przepisu</a></td>
+                    </tr>
+                {% endfor %}
+            </table>
         </div>
     </section>
 

@@ -20,12 +20,18 @@ class IndexView(View):
         recipe1 = Recipe.objects.filter(id=list_recipes[0].id)
         recipe2 = Recipe.objects.filter(id=list_recipes[1].id)
         recipe3 = Recipe.objects.filter(id=list_recipes[2].id)
-        return render(request, "index.html",
-                      {
-                      "recipe1": recipe1,
-                      "recipe2": recipe2,
-                      "recipe3": recipe3}
-                      )
+
+        plans = Plan.objects.all().order_by("-created")
+        newest_plan = plans.first()
+        plan_days = RecipePlan.objects.filter(plan_id=newest_plan.id).order_by("order")
+
+        return render(request, "index.html", {
+            "recipe1": recipe1,
+            "recipe2": recipe2,
+            "recipe3": recipe3,
+            "newest_plan": newest_plan,
+            "plan_days": plan_days
+        })
 
 class Dashboard(View):
     def get(self, request):
@@ -43,8 +49,12 @@ class RecipeView(View):
         ctx = {"recipes": recipes}
         return render(request, "app-recipes.html", ctx)
 
-class RecipeAdd(View):
+class RecipeDetails(View):
+    def get(self, request, id):
+        recipe = Recipe.objects.get(pk=id)
+        return render(request, "app-recipe-details.html", {"recipe": recipe})
 
+class RecipeAdd(View):
     def get(self, request):
         return render(request, "app-add-recipe.html")
 
