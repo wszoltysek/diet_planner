@@ -23,5 +23,6 @@ urlpatterns = [
     path('', IndexView.as_view()),
     path('recipe/list/', RecipeView.as_view()),
     path('main/', Dashboard.as_view()),
-    path('recipe/add/', RecipeAdd.as_view())
+    path('recipe/add/', RecipeAdd.as_view()),
+    path('plan/add/', PlanAdd.as_view())
 ]

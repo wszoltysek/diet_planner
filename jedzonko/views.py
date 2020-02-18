@@ -52,3 +52,19 @@ class RecipeAdd(View):
                                   created=datetime.datetime.utcnow(),
                                   updated=datetime.datetime.utcnow())
         return render(request, "app-add-recipe.html")
+
+
+class PlanAdd(View):
+
+    def get(self, request):
+        return render(request, "app-add-schedules.html")
+
+    def post(self, request):
+        name = request.POST.get("name")
+        description = request.POST.get("description")
+        created = datetime.datetime.now()
+        if name and description and created:
+            Plan.objects.create(name=name,
+                                description=description,
+                                created=created)
+        return render(request, "app-add-schedules.html")
