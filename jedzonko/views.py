@@ -9,17 +9,16 @@ from django.contrib import messages
 class IndexView(View):
 
     def get(self, request):
-        # ctx = {"actual_date": datetime.now()}
-        lenght = Recipe.objects.all().__len__()
-        lenght += 6
-        choice = random.randint(6, lenght)
-        recipe1 = Recipe.objects.filter(id=choice)
-        choice = random.randint(6, lenght)
-        recipe2 = Recipe.objects.filter(id=choice)
-        choice = random.randint(6, lenght)
-        recipe3 = Recipe.objects.filter(id=choice)
+        recipes = Recipe.objects.filter()
+        list_recipes = list(recipes)
+        random.shuffle(list_recipes)
+        print(list_recipes[0].name, list_recipes[0].description)
+        recipe1 = Recipe.objects.filter(id=list_recipes[0].id)
+        recipe2 = Recipe.objects.filter(id=list_recipes[1].id)
+        recipe3 = Recipe.objects.filter(id=list_recipes[2].id)
         return render(request, "index.html",
-                      {"recipe1": recipe1,
+                      {
+                      "recipe1": recipe1,
                       "recipe2": recipe2,
                       "recipe3": recipe3}
                       )
