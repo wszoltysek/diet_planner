@@ -1,5 +1,8 @@
 from datetime import datetime
 import random
+from django.core.paginator import Paginator
+
+from django.db.models import F
 from django.shortcuts import render
 from django.views import View
 from jedzonko.models import *
@@ -32,7 +35,12 @@ class Dashboard(View):
 
 class RecipeView(View):
     def get(self, request):
-        return render(request, "app-recipes.html")
+        recipes_list = Recipe.objects.all().order_by(F("votes").desc(), F("created").desc())
+        paginator = Paginator(recipes_list, 25)
+        page = request.GET.get('page')
+        recipes = paginator.get_page(page)
+        ctx = {"recipes": recipes}
+        return render(request, "app-recipes.html", ctx)
 
 class RecipeAdd(View):
 
