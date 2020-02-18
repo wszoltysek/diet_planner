@@ -59,10 +59,23 @@ class PlansList(View):
     def get(self, request):
         return render(request, "empty_page.html")
 
-class PlansAdd(View):
-    def get(self, request):
-        return render(request, "empty_page.html")
 
 class PlanAddRecipe(View):
     def get(self, request):
         return render(request, "empty_page.html")
+
+
+class PlanAdd(View):
+
+    def get(self, request):
+        return render(request, "app-add-schedules.html")
+
+    def post(self, request):
+        name = request.POST.get("name")
+        description = request.POST.get("description")
+        created = datetime.datetime.now()
+        if name and description and created:
+            Plan.objects.create(name=name,
+                                description=description,
+                                created=created)
+        return render(request, "app-add-schedules.html")

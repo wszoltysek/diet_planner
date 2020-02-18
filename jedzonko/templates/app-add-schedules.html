@@ -1,5 +1,7 @@
 {% extends "__base__.html" %}
 {% block content %}
+<form action="/plan/add/" method="post">
+{% csrf_token %}
 <div class="dashboard-content border-dashed p-3 m-4 view-height">
 
     <div class="row border-bottom border-3 p-1 m-1">
@@ -7,7 +9,7 @@
             <h3 class="color-header text-uppercase">NOWY PLAN</h3>
         </div>
         <div class="col d-flex justify-content-end mb-2 noPadding">
-            <a href="" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Zapisz</a>
+            <button type="submit" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Zapisz</button>
         </div>
     </div>
 
@@ -19,7 +21,7 @@
                     Nazwa planu
                 </label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="planName"
+                    <input type="text" name="name" class="form-control" id="planName"
                            placeholder="Nazwa planu">
                 </div>
             </div>
@@ -29,13 +31,14 @@
                     Opis planu
                 </label>
                 <div class="col-sm-10">
-                    <textarea class="form-control" rows="5" id="planDescription"
+                    <textarea class="form-control" name="description" rows="5" id="planDescription"
                               placeholder="Opis plany"></textarea>
                 </div>
             </div>
         </form>
     </div>
 </div>
+</form>
 {% endblock content %}
 
 {% block title %}{% endblock %}

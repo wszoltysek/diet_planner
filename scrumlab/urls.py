@@ -25,7 +25,7 @@ urlpatterns = [
     path('main/', Dashboard.as_view()),
     path('recipe/add/', RecipeAdd.as_view()),
     path('plan/list/', PlansList.as_view()),
-    path('plan/add/', PlansAdd.as_view()),
     path('plan/add-recipe/', PlanAddRecipe.as_view()),
-
+    path('recipe/add/', RecipeAdd.as_view()),
+    path('plan/add/', PlanAdd.as_view())
 ]
