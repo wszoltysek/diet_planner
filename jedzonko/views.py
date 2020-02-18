@@ -52,3 +52,17 @@ class RecipeAdd(View):
                                   created=datetime.datetime.utcnow(),
                                   updated=datetime.datetime.utcnow())
         return render(request, "app-add-recipe.html")
+
+# ZADANIE 2.2 (reszta widoków dla urli zrobiona w innych zadaniach):
+
+class PlansList(View):
+    def get(self, request):
+        return render(request, "empty_page.html")
+
+class PlansAdd(View):
+    def get(self, request):
+        return render(request, "empty_page.html")
+
+class PlanAddRecipe(View):
+    def get(self, request):
+        return render(request, "empty_page.html")
