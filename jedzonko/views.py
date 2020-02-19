@@ -89,7 +89,33 @@ class PlansList(View):
 
 class PlanAddRecipe(View):
     def get(self, request):
-        return render(request, "empty_page.html")
+        recipes = Recipe.objects.all()
+        plans = Plan.objects.all()
+        days = DayName.objects.all()
+        return render(request, "app-schedules-meal-recipe.html",
+                      {"recipes": recipes,
+                       "plans": plans,
+                       "days": days})
+
+    def post(self, request):
+        plan = Plan.objects.get(name=request.POST.get('plan'))
+        meal_name = request.POST.get('meal_name')
+        order = request.POST.get('order')
+        day_name = DayName.objects.get(name=request.POST.get('day_name'))
+        recipe = Recipe.objects.get(name=request.POST.get('recipe'))
+        if plan and meal_name and order and day_name and recipe:
+            recipe_plan = RecipePlan.objects.create(
+                meal_name=meal_name,
+                recipe=recipe,
+                plan=plan,
+                order=order,
+                day_name=day_name
+            )
+            message = messages.info(request, "Pomyślnie dodano przepis")
+            return redirect("/plan/add-recipe/", {"message": message})
+        else:
+            message = messages.info(request, "Nie podano wszystkich danych")
+            return redirect("/plan/add-recipe/", {"message": message})
 
 
 class PlanAdd(View):
