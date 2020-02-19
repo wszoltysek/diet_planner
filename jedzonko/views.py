@@ -13,10 +13,9 @@ from django.contrib import messages
 class IndexView(View):
 
     def get(self, request):
-        recipes = Recipe.objects.filter()
+        recipes = Recipe.objects.all()
         list_recipes = list(recipes)
         random.shuffle(list_recipes)
-        print(list_recipes[0].name, list_recipes[0].description)
         recipe1 = Recipe.objects.filter(id=list_recipes[0].id)
         recipe2 = Recipe.objects.filter(id=list_recipes[1].id)
         recipe3 = Recipe.objects.filter(id=list_recipes[2].id)
@@ -77,13 +76,16 @@ class RecipeDetails(View):
         recipe = Recipe.objects.get(pk=id)
         return render(request, "app-recipe-details.html", {"recipe": recipe})
 
-# ZADANIE 2.2 (reszta widoków dla urli zrobiona w innych zadaniach):
 
-
+# ZADANIE 5.2:
 class PlansList(View):
     def get(self, request):
-        return render(request, "empty_page.html")
-
+        plan_list = Plan.objects.all().order_by("name")
+        paginator = Paginator(plan_list, 25)
+        page = request.GET.get('page')
+        plans = paginator.get_page(page)
+        ctx = {"plans": plans}
+        return render(request, "app-schedules.html", ctx)
 
 class PlanAddRecipe(View):
     def get(self, request):
