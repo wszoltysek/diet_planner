@@ -1,6 +1,6 @@
 from datetime import datetime
 import random
-from django.shortcuts import render, render_to_response, redirect
+from django.shortcuts import render, render_to_response, redirect, reverse
 from django.core.paginator import Paginator
 
 from django.db.models import F
@@ -123,15 +123,15 @@ class PlanAdd(View):
     def get(self, request):
         return render(request, "app-add-schedules.html")
 
-    def post(self, request):
+    def post(self, request, id):
         name = request.POST.get("name")
         description = request.POST.get("description")
         created = datetime.datetime.now()
         if name and description and created:
-            Plan.objects.create(name=name,
+            new_plan = Plan.objects.create(name=name,
                                 description=description,
                                 created=created)
-            return render(request, "app-add-schedules.html")
+            return redirect(reverse('app-details-schedules', kwargs={"id": new_plan.id}))
         else:
             error_message = messages.info(request, "Nie podano wszystkich danych")
             return redirect("/plan/add/", {"error_message": error_message})
