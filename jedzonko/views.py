@@ -131,4 +131,7 @@ class PlanAdd(View):
             Plan.objects.create(name=name,
                                 description=description,
                                 created=created)
-        return render(request, "app-add-schedules.html")
+            return render(request, "app-add-schedules.html")
+        else:
+            error_message = messages.info(request, "Nie podano wszystkich danych")
+            return redirect("/plan/add/", {"error_message": error_message})
