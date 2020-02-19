@@ -7,25 +7,32 @@
             <h3 class="color-header text-uppercase">DODAJ PRZEPIS DO PLANU</h3>
         </div>
         <div class="col d-flex justify-content-end mb-2 noPadding">
-            <a href="#" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Zapisz</a>
+            <button form="add_recipe" type="submit" href="/plan/add-recipe/" class="btn btn-success rounded-0 pt-0 pb-0 pr-4 pl-4">Zapisz</button>
         </div>
     </div>
 
     <div class="schedules-content">
-        <form>
+        <form id="add_recipe" action="/plan/add-recipe/" method="post" >
+        {% csrf_token %}
+        {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                {{ message }}</li>
+        {% endfor %}
+        {% endif %}
             <div class="form-group row">
                 <label for="choosePlan"
                        class="col-sm-2 label-size col-form-label">
                     Wybierz plan
                 </label>
                 <div class="col-sm-3">
-                    <select class="form-control" id="choosePlan">
-                        <option>Mój pierwszy plan</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                    <select class="form-control" id="choosePlan" name="plan">
+                        {% for plan in plans %}
+                        <option>{{ plan.name }}</option>
+                        {% endfor %}
                     </select>
+
                 </div>
             </div>
             <div class="form-group row">
@@ -33,7 +40,7 @@
                     Nazwa posiłku
                 </label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" value="" id="name"
+                    <input type="text" class="form-control" name="meal_name" id="name"
                            placeholder="Nazwa posiłku">
                 </div>
             </div>
@@ -42,7 +49,7 @@
                     Numer posiłku
                 </label>
                 <div class="col-sm-2">
-                    <input type="text" class="form-control" value="" id="number"
+                    <input type="number" class="form-control" name="order" id="number"
                            placeholder="Numer posiłku">
                 </div>
             </div>
@@ -51,12 +58,10 @@
                     Przepis
                 </label>
                 <div class="col-sm-4">
-                    <select class="form-control" id="recipie">
-                        <option>Zapiekanka z ziemniakami i brukselką</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                    <select class="form-control" id="recipie" name="recipe">
+                        {% for recipe in recipes %}
+                        <option>{{ recipe.name }}</option>
+                        {% endfor %}
                     </select>
                 </div>
             </div>
@@ -65,12 +70,10 @@
                     Dzień
                 </label>
                 <div class="col-sm-2">
-                    <select class="form-control" id="day">
-                        <option>poniedziałek</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                    <select class="form-control" id="day" name="day_name">
+                        {% for day in days %}
+                        <option>{{ day.name }}</option>
+                        {% endfor %}
                     </select>
                 </div>
             </div>
