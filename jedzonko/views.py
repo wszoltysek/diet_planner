@@ -76,6 +76,15 @@ class RecipeDetails(View):
         recipe = Recipe.objects.get(pk=id)
         return render(request, "app-recipe-details.html", {"recipe": recipe})
 
+# ZADANIE 8.3
+class PlanDetails(View):
+    def get(self, request, id):
+        plan = Plan.objects.get(pk=id)
+        recipeplan = RecipePlan.objects.filter(plan_id=plan.id)
+        return render(request, "app-details-schedules.html",
+                      {"plan": plan,
+                      "recipeplan": recipeplan},
+                      )
 
 # ZADANIE 5.2:
 class PlansList(View):
@@ -106,3 +115,4 @@ class PlanAdd(View):
                                 description=description,
                                 created=created)
         return render(request, "app-add-schedules.html")
+
