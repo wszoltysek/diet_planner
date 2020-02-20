@@ -118,15 +118,18 @@ class PLanDetails(View):
             if qs.count() != 0:
                 dn_list.append(qs[0])
         mn_dict = {}
+        mn_list = []
         # Adding meal_name connected to day_name to dict
         for meal in plan.recipeplan_set.all():
+            mn_list.append(meal.meal_name)
             for day in range(len(dn_list)):
-                mn_dict[dn_list[day].day_name.name] = meal.meal_name
+                mn_dict[dn_list[day].day_name.name] = mn_list
 
         print(mn_dict)
         return render(request, "app-details-schedules.html",
                       {
                           "plan": plan,
-                          "dn_list": dn_list
+                          "dn_list": dn_list,
+                          "mn_dict": mn_list,
                       }
                       )
