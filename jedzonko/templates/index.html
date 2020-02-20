@@ -33,7 +33,10 @@
                     <a class="nav-link" href="#about">o aplikacji</a>
                 </li>
                 <li class="nav-item ml-4">
-                    <a class="nav-link disabled" href="recipes.html">Przepisy</a>
+                    <a class="nav-link disabled" href="/plan/list/">Plany</a>
+                </li>
+                <li class="nav-item ml-4">
+                    <a class="nav-link disabled" href="/recipe/list/">Przepisy</a>
                 </li>
                 <li class="nav-item ml-4">
                     <a class="nav-link disabled" href="#contact">Kontakt</a>
@@ -100,6 +103,7 @@
                     <td>Posiłek</td>
                     <td>Danie</td>
                     <td>Szczegóły</td>
+                    <td>Dodaj</td>
                 </tr>
                 {% for day in plan_days %}
                     <tr>
@@ -107,6 +111,7 @@
                         <td>{{ day.meal_name }}</td>
                         <td>{{ day.recipe.name }}</td>
                         <td><a href="/recipe/{{ day.recipe.id }}">Szczegoły przepisu</a></td>
+                        <td><a href="/plan/add-recipe/">Dodaj przepis do planu</a></td>
                     </tr>
                 {% endfor %}
             </table>
@@ -118,20 +123,20 @@
                 <div class="row">
                     <div class="col text-center">
                         <i class="fas fa-check icon-details"></i>
-                        <h1>Lorem ipsum dolor sit amet</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.  Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.
+                        <h1>JAKOŚĆ</h1>
+                        <p>Tekst o jakości.
                         </p>
                     </div>
                     <div class="col text-center pr-4 pl-4 mr-4 ml-4">
                         <i class="far fa-clock icon-details"></i>
-                        <h1>Lorem ipsum dolor sit amet</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.  Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.
+                        <h1>TERMINOWOŚĆ</h1>
+                        <p>Tekst o terminowości.
                         </p>
                     </div>
                     <div class="col text-center">
                             <i class="fas fa-list icon-details"></i>
-                        <h1>Lorem ipsum dolor sit amet</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at porttitor sem.  Aliquam erat volutpat. Donec placerat nisl magna, et faucibus arcu condimentum sed.
+                        <h1>PRECYZJA</h1>
+                        <p>Tekst o precyzji.
                         </p>
                     </div>
                 </div>
@@ -143,15 +148,15 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <h1>Lorem ipsum dolor sie amet</h1>
+                    <h1>Wypróbuj przez 7 dni za darmo!</h1>
                 </div>
                 <div class="col-5">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control border-0 rounded-0" placeholder=""
+                        <input type="text" class="form-control border-0 rounded-0" placeholder="Wpisz adres e-mail"
                             aria-label="Recipient's username" aria-describedby="basic-addon2">
                         <div class="input-group-append">
                             <button class="input-group-text btn-color border-0 rounded-0" type="submit" id="basic-addon2">
-                                <a href="index.html">Lorem</a>
+                                <a href="index.html">Zapisz się!</a>
                             </button>
                         </div>
                     </div>
