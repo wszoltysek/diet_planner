@@ -1,6 +1,6 @@
 from datetime import datetime
 import random
-from django.shortcuts import render, render_to_response, redirect, reverse
+from django.shortcuts import render, render_to_response, redirect
 from django.core.paginator import Paginator
 
 from django.db.models import F
@@ -76,6 +76,15 @@ class RecipeDetails(View):
         recipe = Recipe.objects.get(pk=id)
         return render(request, "app-recipe-details.html", {"recipe": recipe})
 
+# ZADANIE 8.3
+class PlanDetails(View):
+    def get(self, request, id):
+        plan = Plan.objects.get(pk=id)
+        recipeplan = RecipePlan.objects.filter(plan_id=plan.id)
+        return render(request, "app-details-schedules.html",
+                      {"plan": plan,
+                      "recipeplan": recipeplan},
+                      )
 
 # ZADANIE 5.2:
 class PlansList(View):
@@ -135,3 +144,4 @@ class PlanAdd(View):
         else:
             error_message = messages.info(request, "Nie podano wszystkich danych")
             return redirect("/plan/add/", {"error_message": error_message})
+
