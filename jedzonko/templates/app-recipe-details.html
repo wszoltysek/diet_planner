@@ -30,6 +30,14 @@
              <tr class="d-flex">
                 <th scope="row" class="col-2">Liczba polubień</th>
                 <td class="col-7">{{ recipe.votes }}</td>
+                 <td>
+                     <form action="/recipe/{{ recipe.id }}/" method="post">
+                     {% csrf_token %}
+                         <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
+                     <button class="btn btn-color rounded-0 pt-0 pb-0 pr-2 pl-2" name="like" value="like" type="submit">Lubię!</button>
+                     <button class="btn btn-color rounded-0 pt-0 pb-0 pr-2 pl-2" name="like" value="dislike" type="submit">Nie lubię!</button>
+                     </form>
+                 </td>
             </tr>
             </tbody>
         </table>

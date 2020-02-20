@@ -71,10 +71,27 @@ class RecipeAdd(View):
             error_message = messages.info(request, "Nie podano wszystkich danych")
             return redirect("/recipe/add/", {"error_message": error_message})
 
+
 class RecipeDetails(View):
     def get(self, request, id):
         recipe = Recipe.objects.get(pk=id)
         return render(request, "app-recipe-details.html", {"recipe": recipe})
+
+    def post(self, request, id):
+        recipe_id = request.POST.get("recipe_id")
+        like = request.POST.get("like")
+        if like == "like":
+            recipe = Recipe.objects.get(id=recipe_id)
+            recipe.votes += 1
+            recipe.save()
+            return redirect(f'/recipe/{recipe_id}')
+        else:
+            recipe = Recipe.objects.get(id=recipe_id)
+            recipe.votes -= 1
+            recipe.save()
+            return redirect(f'/recipe/{recipe_id}')
+
+
 
 
 # ZADANIE 5.2:
