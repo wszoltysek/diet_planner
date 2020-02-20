@@ -76,15 +76,6 @@ class RecipeDetails(View):
         recipe = Recipe.objects.get(pk=id)
         return render(request, "app-recipe-details.html", {"recipe": recipe})
 
-# ZADANIE 8.3
-class PlanDetails(View):
-    def get(self, request, id):
-        plan = Plan.objects.get(pk=id)
-        recipeplan = RecipePlan.objects.filter(plan_id=plan.id)
-        return render(request, "app-details-schedules.html",
-                      {"plan": plan,
-                      "recipeplan": recipeplan},
-                      )
 
 # ZADANIE 5.2:
 class PlansList(View):
@@ -145,3 +136,29 @@ class PlanAdd(View):
             error_message = messages.info(request, "Nie podano wszystkich danych")
             return redirect("/plan/add/", {"error_message": error_message})
 
+
+class PLanDetails(View):
+    def get(self, request, id):
+        plan = Plan.objects.get(pk=id)
+        recipeplan = RecipePlan.objects.filter(plan_id=plan.id)
+        day_name = DayName.objects.count()
+        # Adding days to list
+        dn_list = []
+        for day in range(1, day_name + 1):
+            qs = plan.recipeplan_set.filter(day_name=day)
+            if qs.count() != 0:
+                dn_list.append(qs[0])
+        # Adding query_set to dictionary, key is day_name
+        mn_dict = {}
+        for day in range(1, day_name + 1):
+            qs = plan.recipeplan_set.filter(day_name=day)
+            if qs.count() != 0:
+                mn_dict[plan.recipeplan_set.filter(day_name=day)[0].day_name.name] = qs[::-1]
+        return render(request, "app-details-schedules.html",
+                      {
+                          "plan": plan,
+                          "dn_list": dn_list,
+                          "mn_dict": mn_dict,
+                          "recipeplan": recipeplan,
+                      }
+                      )
