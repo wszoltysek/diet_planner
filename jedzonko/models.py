@@ -31,5 +31,11 @@ class RecipePlan(models.Model):
     order = models.IntegerField()
     day_name = models.ForeignKey(DayName, on_delete=models.CASCADE)
 
+class Page(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    slug = models.CharField(max_length=255)
+
+
 
 
