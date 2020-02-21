@@ -29,5 +29,6 @@ urlpatterns = [
     path('plan/add/', PlanAdd.as_view()),
     path('recipe/<int:id>/', RecipeDetails.as_view()),
     path('plan/<int:id>/', PLanDetails.as_view()),
+    path('contact-slug/', ContactSlug.as_view()),
 ]
 

@@ -23,13 +23,15 @@ class IndexView(View):
         plans = Plan.objects.all().order_by("-created")
         newest_plan = plans.first()
         plan_days = RecipePlan.objects.filter(plan_id=newest_plan.id).order_by("order")
-
+        # Making slug object
+        page = Page.objects.filter(slug="contact")
         return render(request, "index.html", {
             "recipe1": recipe1,
             "recipe2": recipe2,
             "recipe3": recipe3,
             "newest_plan": newest_plan,
-            "plan_days": plan_days
+            "plan_days": plan_days,
+            "page": page
         })
 
 
@@ -157,25 +159,19 @@ class PlanAdd(View):
 class PLanDetails(View):
     def get(self, request, id):
         plan = Plan.objects.get(pk=id)
-        recipeplan = RecipePlan.objects.filter(plan_id=plan.id)
         day_name = DayName.objects.count()
-        # Adding days to list
-        dn_list = []
-        for day in range(1, day_name + 1):
-            qs = plan.recipeplan_set.filter(day_name=day)
-            if qs.count() != 0:
-                dn_list.append(qs[0])
-        # Adding query_set to dictionary, key is day_name
+         # Adding query_set to dictionary, key is day_name
         mn_dict = {}
         for day in range(1, day_name + 1):
             qs = plan.recipeplan_set.filter(day_name=day)
             if qs.count() != 0:
                 mn_dict[plan.recipeplan_set.filter(day_name=day)[0].day_name.name] = qs[::-1]
         return render(request, "app-details-schedules.html",
-                      {
-                          "plan": plan,
-                          "dn_list": dn_list,
-                          "mn_dict": mn_dict,
-                          "recipeplan": recipeplan,
-                      }
-                      )
+                      {"plan": plan,
+                       "mn_dict": mn_dict})
+
+class ContactSlug(View):
+    def get(self, request):
+        page = Page.objects.all()
+        contact_slug = page.filter(slug="contact")[0]
+        return render(request, "contact_slug.html", {"contact_slug": contact_slug})

@@ -41,7 +41,7 @@
         </tr>
         </tbody>
         {% endfor %}
-{#    Tu się zaczyna paginacja - nowy kod #}
+{#    Tu się zaczyna paginacja - na górze strony #}
             <div class="dashboard-menu">
 
                 <span class="color-header text-lowercase">
@@ -65,7 +65,32 @@
                 </span>
 
             </div>
-{#    Tu się kończy paginacja #}
+{#    Tu się kończy paginacja na górze strony #}
     </table>
+{#    Tu się zaczyna paginacja - na dole strony #}
+            <div class="dashboard-menu">
+
+                <span class="color-header text-lowercase">
+                    {% if recipes.has_previous %}
+                        <a href="?page={{ recipes.previous_page_number }}">&laquo; poprzednia</a>
+                    {% elif recipes.has_previous == False %}
+                        &laquo; poprzednia
+                    {% endif %}
+
+                    <span class="color-header text-uppercase">
+                    {% for page in recipes.paginator.page_range %}
+                    |<a href="?page={{ page }}">{{ page }}</a>
+                    {% endfor %}|
+                    </span>
+
+                    {% if recipes.has_next %}
+                        <a href="?page={{ recipes.next_page_number }}">następna &raquo;</a>
+                    {% elif recipes.has_next == False %}
+                    następna &raquo;
+                    {% endif %}
+                </span>
+
+            </div>
+{#    Tu się kończy paginacja na dole strony #}
 </div>
 {% endblock content %}

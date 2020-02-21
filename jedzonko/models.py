@@ -1,6 +1,8 @@
 from django.db import models
 import datetime
 
+from django.template.defaultfilters import slugify
+
 
 class Recipe(models.Model):
     name = models.CharField(max_length=64)
@@ -34,8 +36,11 @@ class RecipePlan(models.Model):
 class Page(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
-    slug = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True)
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Page, self).save(*args, **kwargs)
 
 
 
