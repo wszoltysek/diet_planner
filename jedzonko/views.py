@@ -25,13 +25,15 @@ class IndexView(View):
         plan_days = RecipePlan.objects.filter(plan_id=newest_plan.id).order_by("order")
         # Making slug object
         page = Page.objects.filter(slug="contact")
+        about = Page.objects.filter(slug="about")
         return render(request, "index.html", {
             "recipe1": recipe1,
             "recipe2": recipe2,
             "recipe3": recipe3,
             "newest_plan": newest_plan,
             "plan_days": plan_days,
-            "page": page
+            "page": page,
+            "about": about
         })
 
 
@@ -175,3 +177,9 @@ class ContactSlug(View):
         page = Page.objects.all()
         contact_slug = page.filter(slug="contact")[0]
         return render(request, "contact_slug.html", {"contact_slug": contact_slug})
+
+class AboutSlug(View):
+    def get(self, request):
+        page = Page.objects.all()
+        about_slug = page.filter(slug="about")[0]
+        return render(request, "about_slug.html", {"about_slug": about_slug})

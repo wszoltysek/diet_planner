@@ -30,11 +30,7 @@
                 </li>
                 -->
                 <li class="nav-item ml-4">
-                        {% if about %}
-                    <a class="nav-link" href="/about-slug/">o aplikacji</a>
-                        {% else %}
                     <a class="nav-link" href="#about">o aplikacji</a>
-                        {% endif %}
                 </li>
                 <li class="nav-item ml-4">
                     <a class="nav-link disabled" href="/plan/list/">Plany</a>
@@ -43,136 +39,17 @@
                     <a class="nav-link disabled" href="/recipe/list/">Przepisy</a>
                 </li>
                 <li class="nav-item ml-4">
-                        {% if page %}
-                            <a class="nav-link disabled" href="/contact-slug/">Kontakt</a>
-                        {% else %}
-                            <a class="nav-link disabled" href="#contact">Kontakt</a>
-                        {% endif %}
+                    <a class="nav-link disabled" href="#contact">Kontakt</a>
                 </li>
             </ul>
         </nav>
     </header>
-
-    <section class="padding-large bg-light">
-
-        <div id="carouselExampleControls" class="carousel slide main-slider" data-ride="carousel">
-            <div class="carousel-inner container">
-
-                <div class="carousel-item active">
-                    <div class="container w-75 d-flex">
-                        <div class="carousel-caption d-block">
-                            {% for recipe in recipe1 %}
-                            <h1>{{ recipe.name }}</h1>
-                            <h3>{{ recipe.description }}</h3>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="container w-75 d-flex">
-                        <div class="carousel-caption d-block">
-                            {% for recipe in recipe2 %}
-                            <h1>{{ recipe.name }}</h1>
-                            <h3>{{ recipe.description }}</h3>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="container w-75 d-flex">
-                        <div class="carousel-caption d-block">
-                            {% for recipe in recipe3 %}
-                            <h1>{{ recipe.name }}</h1>
-                            <h3>{{ recipe.description }}</h3>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-
-    </section>
-
-    <section class="section-more padding-small">
+     <section class="padding-large bg-light">
         <div class="container justify-content-between">
-            <h1 class="pb-3">Najnowszy plan: {{ newest_plan.name }}</h1>
-            <p>{{ newest_plan.description }}</p>
-            <table>
-                <tr>
-                    <td>Dzień</td>
-                    <td>Posiłek</td>
-                    <td>Danie</td>
-                    <td>Szczegóły</td>
-                    <td>Dodaj</td>
-                </tr>
-                {% for day in plan_days %}
-                    <tr>
-                        <td>{{ day.day_name.name }}</td>
-                        <td>{{ day.meal_name }}</td>
-                        <td>{{ day.recipe.name }}</td>
-                        <td><a href="/recipe/{{ day.recipe.id }}">Szczegoły przepisu</a></td>
-                        <td><a href="/plan/add-recipe/">Dodaj przepis do planu</a></td>
-                    </tr>
-                {% endfor %}
-            </table>
+            <h1 class="pb-3">Slug tytuł: {{ about_slug.title }} </h1>
+            <p>Slug opis: {{ about_slug.description }}</p>
         </div>
     </section>
-
-    <section class="padding-small details bg-light">
-            <div class="container">
-                <div class="row">
-                    <div class="col text-center">
-                        <i class="fas fa-check icon-details"></i>
-                        <h1>JAKOŚĆ</h1>
-                        <p>Tekst o jakości.
-                        </p>
-                    </div>
-                    <div class="col text-center pr-4 pl-4 mr-4 ml-4">
-                        <i class="far fa-clock icon-details"></i>
-                        <h1>TERMINOWOŚĆ</h1>
-                        <p>Tekst o terminowości.
-                        </p>
-                    </div>
-                    <div class="col text-center">
-                            <i class="fas fa-list icon-details"></i>
-                        <h1>PRECYZJA</h1>
-                        <p>Tekst o precyzji.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-    <section class="newsletter-section padding-small">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <h1>Wypróbuj przez 7 dni za darmo!</h1>
-                </div>
-                <div class="col-5">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control border-0 rounded-0" placeholder="Wpisz adres e-mail"
-                            aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="input-group-text btn-color border-0 rounded-0" type="submit" id="basic-addon2">
-                                <a href="index.html">Zapisz się!</a>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section class="padding-medium story bg-light" id="about">
         <div class="container d-flex justify-content-center align-items-center">
             <div class="row">
@@ -180,7 +57,6 @@
                     <div class="div-img">
                     </div>
                 </div>
-
                 <div class="col-7 ml-4">
                     <h1 class="pb-1">O APLIKACJI</h1>
                     <p>Aplikacja dla czytelników bestsellera Pani Marii Ikińskiej. Aplikacja jest super!</p>

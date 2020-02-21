@@ -30,5 +30,6 @@ urlpatterns = [
     path('recipe/<int:id>/', RecipeDetails.as_view()),
     path('plan/<int:id>/', PLanDetails.as_view()),
     path('contact-slug/', ContactSlug.as_view()),
+    path('about-slug/', AboutSlug.as_view()),
 ]
 
