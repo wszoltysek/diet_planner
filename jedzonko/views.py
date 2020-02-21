@@ -8,6 +8,7 @@ from django.shortcuts import render
 from django.views import View
 from jedzonko.models import *
 from django.contrib import messages
+from django.http import Http404
 
 
 class IndexView(View):
@@ -183,3 +184,30 @@ class AboutSlug(View):
         page = Page.objects.all()
         about_slug = page.filter(slug="about")[0]
         return render(request, "about_slug.html", {"about_slug": about_slug})
+
+
+class ModifyRecipe(View):
+
+    def get(self, request, id):
+        recipe = Recipe.objects.filter(id=id)
+        return render(request, 'app-edit-recipe.html', {"recipe": recipe})
+
+    def post(self, request, id):
+        recipe_name = request.POST.get('recipe_name')
+        recipe_description = request.POST.get('recipe_description')
+        recipe_preparation_time = request.POST.get('recipe_preparation_time')
+        recipe_ingredients = request.POST.get('recipe_ingredients')
+        if recipe_name and recipe_description and recipe_ingredients and recipe_preparation_time:
+            new_recipe = Recipe.objects.create(name=recipe_name,
+                                               description=recipe_description,
+                                               preparation_time=recipe_preparation_time,
+                                               ingredients=recipe_ingredients,
+                                               created=datetime.datetime.now(),
+                                               updated=datetime.datetime.now()
+                                               )
+
+            return redirect('/recipe/list/')
+        else:
+            message = messages.info(request, "Nie podano wszystkich danych")
+            return redirect(f"/recipe/modify/{id}", {"message": message})
+

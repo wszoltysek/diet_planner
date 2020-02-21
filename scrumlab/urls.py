@@ -31,5 +31,6 @@ urlpatterns = [
     path('plan/<int:id>/', PLanDetails.as_view()),
     path('contact-slug/', ContactSlug.as_view()),
     path('about-slug/', AboutSlug.as_view()),
+    path('recipe/modify/<int:id>/', ModifyRecipe.as_view())
 ]
 
