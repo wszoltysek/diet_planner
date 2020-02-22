@@ -42,8 +42,17 @@ class Dashboard(View):
     def get(self, request):
         plan_count = Plan.objects.count()
         recipes_count = Recipe.objects.count()
+        plan = Plan.objects.last()
+        day_name = DayName.objects.count()
+        rp_dict = {}
+        for day in range(1, day_name + 1):
+            qs = plan.recipeplan_set.filter(day_name_id=day)
+            if qs.count() != 0:
+                rp_dict[plan.recipeplan_set.filter(day_name=day)[0].day_name.name] = qs[::-1]
         return render(request, "dashboard.html", {"plan_count": plan_count,
-                                                  "recipes_count": recipes_count})
+                                                  "recipes_count": recipes_count,
+                                                  "plan": plan,
+                                                  "rp_dict": rp_dict})
 
 
 class RecipeView(View):
