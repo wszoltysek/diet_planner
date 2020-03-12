@@ -33,6 +33,7 @@ class RecipePlan(models.Model):
     order = models.IntegerField()
     day_name = models.ForeignKey(DayName, on_delete=models.CASCADE)
 
+
 class Page(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
@@ -41,6 +42,3 @@ class Page(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Page, self).save(*args, **kwargs)
-
-
-

@@ -64,6 +64,7 @@ class RecipeView(View):
         ctx = {"recipes": recipes}
         return render(request, "app-recipes.html", ctx)
 
+
 class RecipeAdd(View):
     def get(self, request):
         return render(request, "app-add-recipe.html")
@@ -106,8 +107,6 @@ class RecipeDetails(View):
             return redirect(f'/recipe/{recipe_id}')
 
 
-
-
 # ZADANIE 5.2:
 class PlansList(View):
     def get(self, request):
@@ -117,6 +116,7 @@ class PlansList(View):
         plans = paginator.get_page(page)
         ctx = {"plans": plans}
         return render(request, "app-schedules.html", ctx)
+
 
 class PlanAddRecipe(View):
     def get(self, request):
@@ -160,8 +160,8 @@ class PlanAdd(View):
         created = datetime.datetime.now()
         if name and description and created:
             new_plan = Plan.objects.create(name=name,
-                                description=description,
-                                created=created)
+                                           description=description,
+                                           created=created)
             return redirect(f'/plan/{new_plan.id}')
         else:
             error_message = messages.info(request, "Nie podano wszystkich danych")
@@ -172,7 +172,7 @@ class PLanDetails(View):
     def get(self, request, id):
         plan = Plan.objects.get(pk=id)
         day_name = DayName.objects.count()
-         # Adding query_set to dictionary, key is day_name
+        # Adding query_set to dictionary, key is day_name
         mn_dict = {}
         for day in range(1, day_name + 1):
             qs = plan.recipeplan_set.filter(day_name=day)
@@ -182,11 +182,13 @@ class PLanDetails(View):
                       {"plan": plan,
                        "mn_dict": mn_dict})
 
+
 class ContactSlug(View):
     def get(self, request):
         page = Page.objects.all()
         contact_slug = page.filter(slug="contact")[0]
         return render(request, "contact_slug.html", {"contact_slug": contact_slug})
+
 
 class AboutSlug(View):
     def get(self, request):
@@ -219,4 +221,3 @@ class ModifyRecipe(View):
         else:
             message = messages.info(request, "Nie podano wszystkich danych")
             return redirect(f"/recipe/modify/{id}", {"message": message})
-
